@@ -1,0 +1,47 @@
+Cook Book
+-------------------------------------------------------------------------------
+Program name: run_analysis.R
+Purpose:      Peer-graded Assignment: Getting and Cleaning Data Course Project
+Required library: dplyr
+-------------------------------------------------------------------------------
+Prepare work environment: setwd("C://Users//bingh//Documents//JHU_Course3_DataClean")
+Download data from URL:   https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+Unzip downloaded file to folder: ./UCI HAR Dataset
+
+Input datasets (.txt format)
+	README.txt
+	features_info.txt --- Shows information about the variables used on the feature vector.
+	features.txt ---- 561 obs with 2 variables, list all 561-feature vector with time and frequency domain variables. 
+	activity_label.txt --- 6 obs with 2 variables, class labels with their activity name.
+	test/x_test.txt ---- test set (2947 Obs with 561 variables)
+	test/y_test.txt ---- test label (2947 Obs with 1 variable)
+        test/subject_test ---- identifies the subject who performed the activity for test (2947 Obs with 1 variable)
+	train/x_train.txt ---- train set (7352 Obs with 561 varaibles)
+	train/y_train.txt ---- train label (7352 Obs with 1 varaible)
+        train/subject_train ---- identifies the subject who performed the activity for train (7352 Obs with 1 varaible)
+
+Part 1. Merges the training and the test sets to create one data set.
+	appending rows in x_test and x_train as X with rbind() --- (2947 + 7352 = 10299 Obs and 561 variables)
+        appending rows in y_test and y_train as Y with rbind() --- (2947 + 7352 = 10299 Obs and 1 variable)
+        appending rows in subject_test and subject_train as subject with rbind() --- (2947 + 7352 = 10299 Obs and 1 variable)
+        merge X, Y, subject as one dataset All_Data (10299 Obs and 563 variables)
+        
+Part 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+	generate ExtData only include measurements for mean and std by select only variables name contains "mean" or "std"--- (10299 Obs and 88 variables)
+
+Part 3. Uses descriptive activity names to name the activities in the data set
+	apply name of activity in data activity_labels for code. and name variable as "activity"
+
+Part 4. Appropriately labels the data set with descriptive variable names. 
+	Give the variable names with meanning: 
+		acc --- Accelerometer
+		gyo --- Gyroscope
+		t (beginning of the name) ---- Time
+                f (beginning of the name) ---- Frequency
+		mag --- Magnitude
+		bodybody --- Body
+	
+Part 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.	
+	generate OutputData by gen average of each variable for each activity and each subject. 
+	(180 Obs and 88 variables)
+	output to "OutputData.txt"
